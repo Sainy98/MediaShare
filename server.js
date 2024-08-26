@@ -43,7 +43,8 @@ app.post('/upload', upload.array('mediaFiles', 10), (req, res) => {
         }
 
         const fileLinks = files.map(file => {
-            const fileUrl = `${req.protocol}://${req.get('host')}/files/${file.filename}`;
+            const encodedFilename = encodeURIComponent(file.filename);
+            const fileUrl = `https://${req.get('host')}/files/${encodedFilename}`;
             return fileUrl;
         });
 
